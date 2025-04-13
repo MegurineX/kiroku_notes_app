@@ -227,32 +227,32 @@ class LoginTexts extends ChangeNotifier {
   static const String _defaultWelcomeBack = 'ようこそ!';
   static const String _defaultWelcomeBackDescription =
       "日々の業務もしっかりサポート。ケア記録アプリを安心してを使いいただけるよう!";
-  static const String _defaultLogin = 'Login';
-  static const String _defaultLoginFormTitle = 'Login to Account';
-  static const String _defaultLoginUseEmail = 'or use your email account:';
-  static const String _defaultForgotPassword = 'Forgot Password?';
-  static const String _defaultAlreadyHaveAnAccount = 'Already have an account?';
+  static const String _defaultLogin = 'ログイン';
+  static const String _defaultLoginFormTitle = 'アカウントにログイン';
+  static const String _defaultLoginUseEmail = 'またはメールアカウントを使用する:';
+  static const String _defaultForgotPassword = 'ぱすわーどを忘れますか?';
+  static const String _defaultAlreadyHaveAnAccount = '';
 
-  static const String _defaultNameHint = 'Name';
-  static const String _defaultSignupEmailHint = 'Email';
-  static const String _defaultSignupPasswordHint = 'Password';
-  static const String _defaultLoginEmailHint = 'Email';
-  static const String _defaultLoginPasswordHint = 'Password';
-  static const String _defaultConfirmPasswordHint = 'Confirm Password';
+  static const String _defaultNameHint = '名前';
+  static const String _defaultSignupEmailHint = 'メール';
+  static const String _defaultSignupPasswordHint = 'パスワード';
+  static const String _defaultLoginEmailHint = 'メール';
+  static const String _defaultLoginPasswordHint = 'パスワード';
+  static const String _defaultConfirmPasswordHint = 'パスワードを確認';
 
   static const String _defaultPasswordMatchingError =
-      'The passwords you entered do not match, check again.';
-  static const String _defaultDialogButtonText = 'OK';
-  static const String _defaultChooseLanguageTitle = 'Choose your language';
-  static const String _defaultAgreementText = 'I agree to the ';
-  static const String _defaultPrivacyPolicyText = 'Privacy Policy';
-  static const String _defaultTermsConditionsText = 'Terms & Conditions';
+      '入力したパスワードが一致しません、もう一度確認してください.';
+  static const String _defaultDialogButtonText = '了解';
+  static const String _defaultChooseLanguageTitle = '言語を選択してください';
+  static const String _defaultAgreementText = '同意する ';
+  static const String _defaultPrivacyPolicyText = 'プライバシーポリシー’;
+  static const String _defaultTermsConditionsText = '利用規約';
   static const String _defaultPrivacyPolicyLink =
       'https://github.com/bahricanyesil';
   static const String _defaultTermsConditionsLink =
       'https://github.com/bahricanyesil';
   static const String _defaultCheckboxError =
-      '! Please agree to the Privacy Policy and Terms & Conditions !';
+      '! プライバシーポリシーと利用規約に同意してください !';
 
   final String? _welcome;
 
