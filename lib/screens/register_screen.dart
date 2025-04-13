@@ -10,7 +10,7 @@ class SignUpScreen extends StatelessWidget {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: const Text("Sign Up"),
+        title: const Text("サインアップ"),
       ),
       body: SafeArea(
         child: Center(
@@ -24,7 +24,7 @@ class SignUpScreen extends StatelessWidget {
                   children: [
                     const SizedBox(height: 16),
                     const Text(
-                      "Register Account",
+                      "アカウントを登録する",
                       style: TextStyle(
                         color: Colors.black,
                         fontSize: 32,
@@ -33,7 +33,7 @@ class SignUpScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 8),
                     const Text(
-                      "Complete your details or continue \nwith social media",
+                      "詳細を入力するか続行してください \nとSNS",
                       textAlign: TextAlign.center,
                       style: TextStyle(color: Color(0xFF757575)),
                     ),
@@ -51,7 +51,7 @@ class SignUpScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 16),
                     const Text(
-                      "By continuing your confirm that you agree \nwith our Term and Condition",
+                      "続行すると同意したことになります \nと当社の利用規約",
                       textAlign: TextAlign.center,
                       style: TextStyle(color: Color(0xFF757575)),
                     ),
@@ -87,8 +87,8 @@ class SignUpForm extends StatelessWidget {
               onChanged: (email) {},
               textInputAction: TextInputAction.next,
               decoration: InputDecoration(
-                hintText: "Enter your email",
-                labelText: "Email",
+                hintText: "メールアドレス入力してください",
+                labelText: "メール",
                 floatingLabelBehavior: FloatingLabelBehavior.always,
                 hintStyle: const TextStyle(color: Color(0xFF757575)),
                 contentPadding: const EdgeInsets.symmetric(
@@ -115,8 +115,8 @@ class SignUpForm extends StatelessWidget {
                 obscureText: true,
                 textInputAction: TextInputAction.next,
                 decoration: InputDecoration(
-                  hintText: "Enter your password",
-                  labelText: "Password",
+                  hintText: "パスワードを入力してください",
+                  labelText: "パスワード",
                   floatingLabelBehavior: FloatingLabelBehavior.always,
                   hintStyle: const TextStyle(color: Color(0xFF757575)),
                   contentPadding: const EdgeInsets.symmetric(
@@ -141,8 +141,8 @@ class SignUpForm extends StatelessWidget {
               onChanged: (password) {},
               obscureText: true,
               decoration: InputDecoration(
-                hintText: "Re-enter your password",
-                labelText: "Confirm Password",
+                hintText: "パスワードを再入力してください",
+                labelText: "パスワードを確認する",
                 floatingLabelBehavior: FloatingLabelBehavior.always,
                 hintStyle: const TextStyle(color: Color(0xFF757575)),
                 contentPadding: const EdgeInsets.symmetric(
@@ -182,7 +182,7 @@ class SignUpForm extends StatelessWidget {
                     borderRadius: BorderRadius.all(Radius.circular(16)),
                   ),
                 ),
-                child: const Text("Continue"),
+                child: const Text("続く"),
               ),
             ),
           ),

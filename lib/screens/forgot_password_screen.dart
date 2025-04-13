@@ -43,7 +43,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
       });
     } catch (e) {
       setState(() {
-        _errorMessage = 'Terjadi kesalahan, silakan coba lagi.';
+        _errorMessage = 'エラーがあります。もう一度お試しください.';
         _isLoading = false;
       });
     }
@@ -55,7 +55,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: const Text("Lupa Password"),
+        title: const Text("パスワードを忘れた"),
       ),
       body: SafeArea(
         child: Center(
@@ -85,7 +85,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
         const Icon(Icons.mark_email_read, size: 80, color: Color(0xFFFF7643)),
         const SizedBox(height: 24),
         const Text(
-          "Email Terkirim!",
+          "メール送信済み!",
           style: TextStyle(
             color: Colors.black,
             fontSize: 24,
@@ -94,13 +94,13 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
         ),
         const SizedBox(height: 16),
         Text(
-          "Instruksi reset password telah dikirim ke ${_emailController.text}",
+          "パスワードリセットの手順が ${_emailController.text} メールで送信されました。",
           textAlign: TextAlign.center,
           style: const TextStyle(color: Color(0xFF757575)),
         ),
         const SizedBox(height: 24),
         const Text(
-          "Periksa email Anda dan klik link untuk mengatur ulang password Anda.",
+          "メールを確認し、リンクをクリックしてパスワードをリセットしてください.",
           textAlign: TextAlign.center,
           style: TextStyle(color: Color(0xFF757575)),
         ),
@@ -122,7 +122,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                   borderRadius: BorderRadius.all(Radius.circular(16)),
                 ),
               ),
-              child: const Text("Kembali ke Login"),
+              child: const Text("ログインに戻る"),
             ),
           ),
         ),
@@ -137,7 +137,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
         children: [
           const SizedBox(height: 32),
           const Text(
-            "Lupa Password",
+            "パスワードを忘れた",
             style: TextStyle(
               color: Colors.black,
               fontSize: 32,
@@ -146,7 +146,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
           ),
           const SizedBox(height: 16),
           const Text(
-            "Masukkan alamat email Anda dan kami akan mengirimkan link untuk mengatur ulang password Anda",
+            "メールアドレスを入力すると、パスワードをリセットするためのリンクが送信されます",
             textAlign: TextAlign.center,
             style: TextStyle(color: Color(0xFF757575)),
           ),
@@ -157,8 +157,8 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
               controller: _emailController,
               keyboardType: TextInputType.emailAddress,
               decoration: const InputDecoration(
-                hintText: "Masukkan email Anda",
-                labelText: "Email",
+                hintText: "メールアドレスを入力してください",
+                labelText: "メール",
                 floatingLabelBehavior: FloatingLabelBehavior.always,
                 hintStyle: TextStyle(color: Color(0xFF757575)),
                 contentPadding: EdgeInsets.symmetric(
@@ -180,12 +180,12 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
               ),
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return 'Email tidak boleh kosong';
+                  return 'メールアドレスは空欄にできません';
                 }
                 if (!RegExp(
                   r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$',
                 ).hasMatch(value)) {
-                  return 'Masukkan email yang valid';
+                  return '有効なメールアドレスを入力してください！';
                 }
                 return null;
               },
@@ -226,7 +226,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                             strokeWidth: 2,
                           ),
                         )
-                        : const Text("Kirim Link Reset"),
+                        : const Text("りせっとリンクを送信"),
               ),
             ),
           ),
@@ -236,7 +236,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
               Navigator.pop(context);
             },
             child: const Text(
-              'Kembali ke Login',
+              'ログインに戻る',
               style: TextStyle(color: Color(0xFFFF7643)),
             ),
           ),

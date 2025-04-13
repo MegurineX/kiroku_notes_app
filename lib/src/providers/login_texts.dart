@@ -216,17 +216,17 @@ class LoginTexts extends ChangeNotifier {
   /// Custom value in the constructor is assigned to [_checkboxError].
   String get checkboxError => _checkboxError ?? _defaultCheckboxError;
 
-  static const String _defaultWelcome = 'Welcome!';
+  static const String _defaultWelcome = 'ようこそ!';
   static const String _defaultWelcomeDescription =
-      'You are where you find the best you are looking for!';
-  static const String _defaultSignUp = 'Sign Up';
-  static const String _defaultSignUpFormTitle = 'Create an Account';
+      '日々の業務もしっかりサポート。ケア記録アプリを安心してを使いいただけるよう!';
+  static const String _defaultSignUp = 'サインアップ';
+  static const String _defaultSignUpFormTitle = 'アカウントを作成する';
   static const String _defaultSignUpUseEmail =
-      'or use your email for registration:';
-  static const String _defaultNotHaveAnAccount = 'Not have an account?';
-  static const String _defaultWelcomeBack = 'Welcome Back!';
+      'またはメールアドレスを使用して登録してください:';
+  static const String _defaultNotHaveAnAccount = 'アカウントを持っていない方?';
+  static const String _defaultWelcomeBack = 'ようこそ!';
   static const String _defaultWelcomeBackDescription =
-      "Welcome back to the best. We're always here, waiting for you!";
+      "日々の業務もしっかりサポート。ケア記録アプリを安心してを使いいただけるよう!";
   static const String _defaultLogin = 'Login';
   static const String _defaultLoginFormTitle = 'Login to Account';
   static const String _defaultLoginUseEmail = 'or use your email account:';

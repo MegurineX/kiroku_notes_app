@@ -47,9 +47,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 ),
               ),
               ErrorInfo(
-                title: "Hello and Welcome",
+                title: "ようこそ！",
                 description:
-                    "We're setting things up for you. This will only take a moment.",
+                    "準備中です。少し時間かかります.",
                 button: CircularProgressIndicator.adaptive(),
                 press: () {},
               ),
@@ -107,7 +107,7 @@ class ErrorInfo extends StatelessWidget {
                       borderRadius: BorderRadius.all(Radius.circular(8)),
                     ),
                   ),
-                  child: Text(btnText ?? "Retry".toUpperCase()),
+                  child: Text(btnText ?? "リトライ".toUpperCase()),
                 ),
             const SizedBox(height: 16),
           ],

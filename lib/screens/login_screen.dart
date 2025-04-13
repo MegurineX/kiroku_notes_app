@@ -42,7 +42,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   );
                 });
-                return 'Silakan verifikasi email Anda terlebih dahulu.';
+                return 'メールアドレスを確認してください';
               }
 
               // Navigasi ke halaman home setelah login berhasil
@@ -55,7 +55,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
               return null;
             } on FirebaseAuthException catch (e) {
-              print("Error during login: ${e.message}");
+              print("ログイン中にエラーが発生しました: ${e.message}");
               return e.message;
             }
           },
@@ -80,7 +80,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 );
               });
 
-              return 'Akun berhasil dibuat. Silakan verifikasi email Anda.';
+              return 'アカウントが正常に作成されました。メールアドレスを確認してください。';
             } on FirebaseAuthException catch (e) {
               return e.message;
             }

@@ -68,12 +68,12 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
   @override
   Widget build(BuildContext context) {
     return _isEmailVerified
-        ? const Scaffold(body: Center(child: Text('Email has been verified!')))
+        ? const Scaffold(body: Center(child: Text('メールが確認されました!')))
         : Scaffold(
           backgroundColor: Colors.white, // 1. Warna latar belakang putih
           appBar: AppBar(
             backgroundColor: Colors.white, // 2. Warna AppBar putih
-            title: const Text('Email Verification'),
+            title: const Text('メール認証'),
           ),
           body: SafeArea(
             child: Center(
@@ -91,7 +91,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                       children: [
                         const SizedBox(height: 32),
                         const Text(
-                          'A verification email has been sent to your email. \nPlease check your email and click on the verification link.',
+                          '確認メールがあなたのメールアドレスに送信されました. \nメールを確認し、確認リンクをクリックしてください.',
                           textAlign: TextAlign.center,
                           style: TextStyle(color: Color(0xFF757575)),
                         ),
@@ -119,7 +119,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                                   ),
                                 ),
                               ),
-                              child: const Text('Resend Verification Email'),
+                              child: const Text('確認メールを再送信'),
                             ),
                           ),
                         ),
@@ -134,7 +134,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                             }
                           },
                           child: const Text(
-                            'Cancel',
+                            'キャンセル',
                             style: TextStyle(color: Color(0xFFFF7643)),
                           ),
                         ),
