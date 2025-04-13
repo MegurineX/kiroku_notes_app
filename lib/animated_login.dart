@@ -2,11 +2,6 @@ library animated_login;
 
 import 'dart:async';
 
-import 'login_screen.dart';
-import 'email_verification_screen.dart';
-import 'forgot_password_screen.dart';
-import 'home_screen.dart';
-import 'package:animated_login/src/constants/enums/animated_component.dart';
 import 'package:animated_login/src/models/language_option.dart';
 import 'package:animated_login/src/models/social_login.dart';
 import 'package:animated_login/src/models/validator_model.dart';
@@ -42,9 +37,9 @@ class AnimatedLogin extends StatefulWidget {
     this.formKey,
     this.checkError = true,
     @Deprecated('Instead prefer to use componentOrder to not show some parts.')
-        this.showForgotPassword = true,
+    this.showForgotPassword = true,
     @Deprecated('Instead prefer to use componentOrder to not show some parts.')
-        this.showChangeActionTitle = true,
+    this.showChangeActionTitle = true,
     this.showPasswordVisibility = true,
     this.nameValidator,
     this.emailValidator,
@@ -70,16 +65,16 @@ class AnimatedLogin extends StatefulWidget {
     this.privacyPolicyChild,
     this.checkboxCallback,
     Key? key,
-  })  : assert(
-          (changeLanguageCallback != null &&
-                  languageOptions.length != 0 &&
-                  selectedLanguage != null) ||
-              (changeLanguageCallback == null &&
-                  languageOptions.length == 0 &&
-                  selectedLanguage == null),
-          '''To use change language button, you should provide both callback and language options.''',
-        ),
-        super(key: key);
+  }) : assert(
+         (changeLanguageCallback != null &&
+                 languageOptions.length != 0 &&
+                 selectedLanguage != null) ||
+             (changeLanguageCallback == null &&
+                 languageOptions.length == 0 &&
+                 selectedLanguage == null),
+         '''To use change language button, you should provide both callback and language options.''',
+       ),
+       super(key: key);
 
   /// Determines all of the theme related variables for *DESKTOP* view.
   /// Example: colors, text styles, button styles.
@@ -213,9 +208,11 @@ class _AnimatedLoginState extends State<AnimatedLogin> {
       desktopTheme: widget.loginDesktopTheme,
       mobileTheme: widget.loginMobileTheme,
     )..backgroundColor ??= Theme.of(context).primaryColor.withOpacity(.8);
-    final loginTexts = widget.loginTexts ?? LoginTexts()
-      ..language = widget.selectedLanguage;
-    final hasPrivacyPolicy = loginTheme.animatedComponentOrder.indexWhere(
+    final loginTexts =
+        widget.loginTexts ?? LoginTexts()
+          ..language = widget.selectedLanguage;
+    final hasPrivacyPolicy =
+        loginTheme.animatedComponentOrder.indexWhere(
           (AnimatedComponent c) =>
               c.component == LoginComponents.policyCheckbox,
         ) !=
@@ -225,66 +222,67 @@ class _AnimatedLoginState extends State<AnimatedLogin> {
         ChangeNotifierProvider<LoginTexts>.value(value: loginTexts),
         ChangeNotifierProvider<LoginTheme>.value(value: loginTheme),
         ChangeNotifierProvider<Auth>(
-          create: (BuildContext context) => Auth(
-            onForgotPassword: widget.onForgotPassword,
-            onLogin: widget.onLogin,
-            onSignup: widget.onSignup,
-            checkboxCallback: widget.checkboxCallback,
-            socialLogins: widget.socialLogins,
-            initialMode: widget.initialMode,
-            onAuthModeChange: widget.onAuthModeChange,
-            signUpMode: widget.signUpMode,
-            formKey: _formKey,
-            showPasswordVisibility: widget.showPasswordVisibility,
-            nameController: widget.nameController,
-            emailController: widget.emailController,
-            passwordController: widget.passwordController,
-            confirmPasswordController: widget.confirmPasswordController,
-            nameValidator: widget.nameValidator,
-            emailValidator: widget.emailValidator,
-            passwordValidator: widget.passwordValidator,
-            validateName: widget.validateName,
-            validateEmail: widget.validateEmail,
-            validatePassword: widget.validatePassword,
-            validateCheckbox: widget.validateCheckbox,
-            hasPrivacyPolicy: hasPrivacyPolicy,
-          ),
+          create:
+              (BuildContext context) => Auth(
+                onForgotPassword: widget.onForgotPassword,
+                onLogin: widget.onLogin,
+                onSignup: widget.onSignup,
+                checkboxCallback: widget.checkboxCallback,
+                socialLogins: widget.socialLogins,
+                initialMode: widget.initialMode,
+                onAuthModeChange: widget.onAuthModeChange,
+                signUpMode: widget.signUpMode,
+                formKey: _formKey,
+                showPasswordVisibility: widget.showPasswordVisibility,
+                nameController: widget.nameController,
+                emailController: widget.emailController,
+                passwordController: widget.passwordController,
+                confirmPasswordController: widget.confirmPasswordController,
+                nameValidator: widget.nameValidator,
+                emailValidator: widget.emailValidator,
+                passwordValidator: widget.passwordValidator,
+                validateName: widget.validateName,
+                validateEmail: widget.validateEmail,
+                validatePassword: widget.validatePassword,
+                validateCheckbox: widget.validateCheckbox,
+                hasPrivacyPolicy: hasPrivacyPolicy,
+              ),
         ),
       ],
-      child: kIsWeb
-          ? _webScaffold(loginTheme.backgroundColor)
-          : GestureDetector(
-              behavior: HitTestBehavior.opaque,
-              onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-              child: _webScaffold(loginTheme.backgroundColor),
-            ),
+      child:
+          kIsWeb
+              ? _webScaffold(loginTheme.backgroundColor)
+              : GestureDetector(
+                behavior: HitTestBehavior.opaque,
+                onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+                child: _webScaffold(loginTheme.backgroundColor),
+              ),
     );
   }
 
   Widget _webScaffold(Color? backgroundColor) => Scaffold(
-        backgroundColor: backgroundColor,
-        body: LayoutBuilder(
-          builder: (BuildContext context, BoxConstraints constraints) {
-            final isLandscape =
-                constraints.maxHeight / constraints.maxWidth < 1.05;
-            context.read<LoginTheme>().setIsLandscape(newValue: isLandscape);
-            return _safeArea;
-          },
-        ),
-      );
+    backgroundColor: backgroundColor,
+    body: LayoutBuilder(
+      builder: (BuildContext context, BoxConstraints constraints) {
+        final isLandscape = constraints.maxHeight / constraints.maxWidth < 1.05;
+        context.read<LoginTheme>().setIsLandscape(newValue: isLandscape);
+        return _safeArea;
+      },
+    ),
+  );
 
   Widget get _safeArea => SafeArea(
-        child: _View(
-          formKey: _formKey,
-          backgroundImage: widget.backgroundImage,
-          logo: widget.logo,
-          languageOptions: widget.languageOptions,
-          changeLanguageCallback: widget.changeLanguageCallback,
-          changeLangDefaultOnPressed: widget.changeLangDefaultOnPressed,
-          changeLangOnPressed: widget.changeLangOnPressed,
-          privacyPolicyChild: widget.privacyPolicyChild,
-        ),
-      );
+    child: _View(
+      formKey: _formKey,
+      backgroundImage: widget.backgroundImage,
+      logo: widget.logo,
+      languageOptions: widget.languageOptions,
+      changeLanguageCallback: widget.changeLanguageCallback,
+      changeLangDefaultOnPressed: widget.changeLangDefaultOnPressed,
+      changeLangOnPressed: widget.changeLangOnPressed,
+      privacyPolicyChild: widget.privacyPolicyChild,
+    ),
+  );
 }
 
 class _View extends StatefulWidget {
@@ -351,7 +349,8 @@ class __ViewState extends State<_View> with SingleTickerProviderStateMixin {
     super.initState();
     animationController = AnimationController(
       vsync: this,
-      duration: context.read<LoginTheme>().animationDuration ??
+      duration:
+          context.read<LoginTheme>().animationDuration ??
           const Duration(milliseconds: 600),
     );
   }
@@ -378,51 +377,52 @@ class __ViewState extends State<_View> with SingleTickerProviderStateMixin {
   }
 
   Widget get _webView => Stack(
-        children: <Widget>[
-          Container(color: loginTheme.backgroundColor),
-          _animatedWebWelcome,
-          _WebForm(
-            animationController: animationController,
-            privacyPolicyChild: widget.privacyPolicyChild,
-          ),
-          if (widget.changeLanguageCallback != null &&
-              loginTexts.language != null &&
-              widget.languageOptions.isNotEmpty)
-            _changeLanguage,
-        ],
-      );
+    children: <Widget>[
+      Container(color: loginTheme.backgroundColor),
+      _animatedWebWelcome,
+      _WebForm(
+        animationController: animationController,
+        privacyPolicyChild: widget.privacyPolicyChild,
+      ),
+      if (widget.changeLanguageCallback != null &&
+          loginTexts.language != null &&
+          widget.languageOptions.isNotEmpty)
+        _changeLanguage,
+    ],
+  );
 
   Widget get _mobileView => Stack(
-        children: <Widget>[
-          Center(
-            child: Padding(
-              padding: EdgeInsets.symmetric(
-                vertical: dynamicSize.height,
-                horizontal: dynamicSize.width * 7,
-              ),
-              child: SingleChildScrollView(
-                physics: const BouncingScrollPhysics(),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.min,
-                  children: _children(_orderedMobileComponents),
-                ),
-              ),
+    children: <Widget>[
+      Center(
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+            vertical: dynamicSize.height,
+            horizontal: dynamicSize.width * 7,
+          ),
+          child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: _children(_orderedMobileComponents),
             ),
           ),
-          if (widget.changeLanguageCallback != null &&
-              loginTexts.language != null &&
-              widget.languageOptions.isNotEmpty)
-            _changeLanguage,
-        ],
-      );
+        ),
+      ),
+      if (widget.changeLanguageCallback != null &&
+          loginTexts.language != null &&
+          widget.languageOptions.isNotEmpty)
+        _changeLanguage,
+    ],
+  );
 
-  Widget get _changeAction => _isLandscape
-      ? _ChangeActionButton(animate: () async => _animate(context))
-      : _ChangeActionTitle(
-          showButtonText: true,
-          animate: () => _animate(context),
-        );
+  Widget get _changeAction =>
+      _isLandscape
+          ? _ChangeActionButton(animate: () async => _animate(context))
+          : _ChangeActionTitle(
+            showButtonText: true,
+            animate: () => _animate(context),
+          );
 
   Widget _mobileWrapper(AnimationType animationType, Widget child) =>
       animationType == AnimationType.left
@@ -430,59 +430,67 @@ class __ViewState extends State<_View> with SingleTickerProviderStateMixin {
           : _rightAnimation(child);
 
   Widget _leftAnimation(Widget extChild) => AnimatedBuilder(
-        animation: welcomeTransitionAnimation,
-        child: extChild,
-        builder: (BuildContext context, Widget? child) => Transform.translate(
-          offset:
-              Offset(dynamicSize.width * welcomeTransitionAnimation.value, 0),
+    animation: welcomeTransitionAnimation,
+    child: extChild,
+    builder:
+        (BuildContext context, Widget? child) => Transform.translate(
+          offset: Offset(
+            dynamicSize.width * welcomeTransitionAnimation.value,
+            0,
+          ),
           child: child,
         ),
-      );
+  );
 
   Widget _rightAnimation(Widget child) => AnimatedBuilder(
-        animation: transitionAnimation,
-        child: child,
-        builder: (BuildContext context, Widget? innerChild) =>
-            Transform.translate(
+    animation: transitionAnimation,
+    child: child,
+    builder:
+        (BuildContext context, Widget? innerChild) => Transform.translate(
           offset: Offset(dynamicSize.width * transitionAnimation.value, 0),
           child: innerChild,
         ),
-      );
+  );
 
   Widget get _animatedWebWelcome => AnimatedBuilder(
-        animation: animationController,
-        child: _webWelcomeChild,
-        builder: (BuildContext context, Widget? child) => Transform.translate(
-          offset:
-              Offset(dynamicSize.width * welcomeTransitionAnimation.value, 0),
+    animation: animationController,
+    child: _webWelcomeChild,
+    builder:
+        (BuildContext context, Widget? child) => Transform.translate(
+          offset: Offset(
+            dynamicSize.width * welcomeTransitionAnimation.value,
+            0,
+          ),
           child: child,
         ),
-      );
+  );
 
   Widget get _webWelcomeChild => Container(
-        decoration: BoxDecoration(
-          color: loginTheme.backgroundColor,
-          image: widget.backgroundImage == null
+    decoration: BoxDecoration(
+      color: loginTheme.backgroundColor,
+      image:
+          widget.backgroundImage == null
               ? null
               : DecorationImage(
-                  image: AssetImage(widget.backgroundImage!),
-                  fit: BoxFit.cover,
-                ),
-        ),
-        width: dynamicSize.width *
-            (100 - context.read<LoginTheme>().formWidthRatio),
-        height: dynamicSize.height * 100,
-        child: _webWelcomeComponents(context),
-      );
+                image: AssetImage(widget.backgroundImage!),
+                fit: BoxFit.cover,
+              ),
+    ),
+    width:
+        dynamicSize.width * (100 - context.read<LoginTheme>().formWidthRatio),
+    height: dynamicSize.height * 100,
+    child: _webWelcomeComponents(context),
+  );
 
   Widget _webWelcomeComponents(BuildContext context) => Padding(
-        padding: context.read<LoginTheme>().welcomePadding ??
-            DynamicSize(context).medHighHorizontalPadding,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: _children(_orderedWelcomeComponents),
-        ),
-      );
+    padding:
+        context.read<LoginTheme>().welcomePadding ??
+        DynamicSize(context).medHighHorizontalPadding,
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: _children(_orderedWelcomeComponents),
+    ),
+  );
 
   List<Widget> _children(
     Widget? Function(AnimatedComponent component) callback,
@@ -511,14 +519,15 @@ class __ViewState extends State<_View> with SingleTickerProviderStateMixin {
             ? const _Description()
             : _mobileWrapper(component.animationType, const _Description());
       case LoginComponents.policyCheckbox:
-        return context
-                    .select<Auth, bool>((Auth auth) => auth.isAnimatedLogin) ||
+        return context.select<Auth, bool>(
+                  (Auth auth) => auth.isAnimatedLogin,
+                ) ||
                 _isLandscape
             ? null
             : _mobileWrapper(
-                component.animationType,
-                const _PolicyCheckboxRow(),
-              );
+              component.animationType,
+              const _PolicyCheckboxRow(),
+            );
       case LoginComponents.notHaveAnAccount:
         return _isLandscape
             ? _ChangeActionTitle()
@@ -575,16 +584,16 @@ class __ViewState extends State<_View> with SingleTickerProviderStateMixin {
   }
 
   Widget get _changeLanguage => Positioned(
-        top: dynamicSize.responsiveSize * 6,
-        right: dynamicSize.responsiveSize * 8,
-        child: _ChangeLanguage(
-          chooseLanguageCallback: widget.changeLanguageCallback!,
-          languageOptions: widget.languageOptions,
-          colorTween: colorTween,
-          onPressed: widget.changeLangOnPressed,
-          defaultOnPressed: widget.changeLangDefaultOnPressed,
-        ),
-      );
+    top: dynamicSize.responsiveSize * 6,
+    right: dynamicSize.responsiveSize * 8,
+    child: _ChangeLanguage(
+      chooseLanguageCallback: widget.changeLanguageCallback!,
+      languageOptions: widget.languageOptions,
+      colorTween: colorTween,
+      onPressed: widget.changeLangOnPressed,
+      defaultOnPressed: widget.changeLangDefaultOnPressed,
+    ),
+  );
 
   void _animate(BuildContext context) {
     if (!context.read<LoginTheme>().isLandscape) {
@@ -599,17 +608,18 @@ class __ViewState extends State<_View> with SingleTickerProviderStateMixin {
   void _initializeAnimations() {
     /// Initializes the transition animation from 0 to form part's width ratio
     /// with custom animation curve and animation controller.
-    welcomeTransitionAnimation = _isLandscape
-        ? Tween<double>(begin: 0, end: loginTheme.formWidthRatio).animate(
-            CurvedAnimation(
-              parent: animationController,
-              curve: loginTheme.animationCurve,
-            ),
-          )
-        : AnimationHelper(
-            animationController: animationController,
-            animationCurve: loginTheme.animationCurve,
-          ).tweenSequenceAnimation(-110, 20);
+    welcomeTransitionAnimation =
+        _isLandscape
+            ? Tween<double>(begin: 0, end: loginTheme.formWidthRatio).animate(
+              CurvedAnimation(
+                parent: animationController,
+                curve: loginTheme.animationCurve,
+              ),
+            )
+            : AnimationHelper(
+              animationController: animationController,
+              animationCurve: loginTheme.animationCurve,
+            ).tweenSequenceAnimation(-110, 20);
 
     colorTween = Tween<double>(begin: 0, end: 1).animate(
       CurvedAnimation(
@@ -622,7 +632,8 @@ class __ViewState extends State<_View> with SingleTickerProviderStateMixin {
       if (mounted) {
         if (_isLandscape) {
           auth.setIsReverse(
-            newValue: welcomeTransitionAnimation.value <=
+            newValue:
+                welcomeTransitionAnimation.value <=
                 context.read<LoginTheme>().formWidthRatio / 2,
           );
         } else if (_forwardCheck) {
@@ -635,17 +646,21 @@ class __ViewState extends State<_View> with SingleTickerProviderStateMixin {
 
     /// Initializes the transition animation from welcome part's width ratio
     /// to 0 with custom animation curve and animation controller.
-    transitionAnimation = _isLandscape
-        ? Tween<double>(begin: 100 - loginTheme.formWidthRatio, end: 0).animate(
-            CurvedAnimation(
-              parent: animationController,
-              curve: loginTheme.animationCurve,
-            ),
-          )
-        : AnimationHelper(
-            animationController: animationController,
-            animationCurve: loginTheme.animationCurve,
-          ).tweenSequenceAnimation(120, 20);
+    transitionAnimation =
+        _isLandscape
+            ? Tween<double>(
+              begin: 100 - loginTheme.formWidthRatio,
+              end: 0,
+            ).animate(
+              CurvedAnimation(
+                parent: animationController,
+                curve: loginTheme.animationCurve,
+              ),
+            )
+            : AnimationHelper(
+              animationController: animationController,
+              animationCurve: loginTheme.animationCurve,
+            ).tweenSequenceAnimation(120, 20);
   }
 
   bool get _forwardCheck =>

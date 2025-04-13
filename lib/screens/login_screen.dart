@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:animated_login/animated_login.dart';
-import 'package:animated_login/src/models/language_option.dart';
+import '/src/models/language_option.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'email_verification_screen.dart';
 import 'forgot_password_screen.dart';
@@ -31,7 +31,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 password: data.password,
               );
 
-                // Check if the email is verified
+              // Check if the email is verified
               if (userCredential.user != null &&
                   !userCredential.user!.emailVerified) {
                 // If not verified, navigate to the email verification page
@@ -46,7 +46,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 return 'メールアドレスを確認してください';
               }
 
-                // Navigate to the home page after successful login
+              // Navigate to the home page after successful login
               WidgetsBinding.instance.addPostFrameCallback((_) {
                 Navigator.pushReplacement(
                   context,
@@ -71,7 +71,7 @@ class _LoginScreenState extends State<LoginScreen> {
               // send email verification
               await userCredential.user!.sendEmailVerification();
 
-                // Navigate the user to the email verification page
+              // Navigate the user to the email verification page
               Future.delayed(Duration.zero, () {
                 Navigator.push(
                   context,
@@ -91,7 +91,7 @@ class _LoginScreenState extends State<LoginScreen> {
               iconPath: 'assets/images/google.png',
               callback: () async {
                 try {
-                    // Google login implementation will be added here
+                  // Google login implementation will be added here
                   return null;
                 } catch (e) {
                   return e.toString();
@@ -102,7 +102,7 @@ class _LoginScreenState extends State<LoginScreen> {
               iconPath: 'assets/images/facebook.png',
               callback: () async {
                 try {
-                    // Facebook login implementation will be added here
+                  // Facebook login implementation will be added here
                   return null;
                 } catch (e) {
                   return e.toString();
@@ -112,7 +112,7 @@ class _LoginScreenState extends State<LoginScreen> {
           ],
           onForgotPassword: (String email) async {
             try {
-                // Navigate to the forgot password page
+              // Navigate to the forgot password page
               Future.delayed(Duration.zero, () {
                 Navigator.push(
                   context,
