@@ -53,7 +53,7 @@ dependencies:
   google_sign_in: ^6.3.0
   flutter_facebook_auth: ^7.1.1
   shared_preferences: ^2.5.3
-  intl: ^0.20.2
+  intl: 0.19.0
   image_picker: ^1.1.2
   firebase_storage: ^12.4.5
   path_provider: ^2.1.5
@@ -71,6 +71,8 @@ dependencies:
   leak_tracker: ^10.0.8
   material_color_utilities: ^0.11.1
   vm_service: ^14.3.1
+  flutter_localizations:
+    sdk: flutter
 
 dev_dependencies:
   flutter_test:
@@ -81,28 +83,31 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^5.0.0
+  flutter_lints: ^3.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter packages.
 flutter:
+  generate: true
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
 
+  # To add assets to your application, add an assets section, like this:
   assets:
     - assets/
     - assets/images/
+    - lib/l10n/
 
   # An image asset can refer to one or more resolution-specific "variants", see
-  # https://flutter.dev/to/resolution-aware-images
+  # https://flutter.dev/assets-and-images/#resolution-aware
 
   # For details regarding adding assets from package dependencies, see
-  # https://flutter.dev/to/asset-from-package
+  # https://flutter.dev/assets-and-images/#from-packages
 
   # To add custom fonts to your application, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a
@@ -122,4 +127,4 @@ flutter:
   #         weight: 700
   #
   # For details regarding fonts from package dependencies,
-  # see https://flutter.dev/to/font-from-package
+  # see https://flutter.dev/custom-fonts/#from-packages

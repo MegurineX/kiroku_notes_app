@@ -1,0 +1,12 @@
+{
+  "@@locale": "id",
+  "login": "Masuk",
+  "signup": "Daftar",
+  "email": "Email",
+  "password": "Kata Sandi",
+  "forgotPassword": "Lupa Kata Sandi?",
+  "name": "Nama",
+  "confirmPassword": "Konfirmasi Kata Sandi",
+  "welcome": "Selamat Datang",
+  "description": "Silakan masuk atau daftar untuk melanjutkan"
+}

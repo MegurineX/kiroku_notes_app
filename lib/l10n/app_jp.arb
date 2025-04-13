@@ -1,0 +1,12 @@
+{
+  "@@locale": "ja",
+  "login": "ログイン",
+  "signup": "サインアップ",
+  "email": "メールアドレス",
+  "password": "パスワード",
+  "forgotPassword": "パスワードを忘れましたか？",
+  "name": "名前",
+  "confirmPassword": "パスワードの確認",
+  "welcome": "ようこそ",
+  "description": "ログインまたはサインアップして続行してください"
+}

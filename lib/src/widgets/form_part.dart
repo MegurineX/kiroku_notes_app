@@ -71,8 +71,9 @@ class __WebFormState extends State<_WebForm> {
     dynamicSize = DynamicSize(context);
     loginTheme = context.watch<LoginTheme>();
     _isLandscape = loginTheme.isLandscape;
-    _isAnimatedLogin =
-        context.select<Auth, bool>((Auth auth) => auth.isAnimatedLogin);
+    _isAnimatedLogin = context.select<Auth, bool>(
+      (Auth auth) => auth.isAnimatedLogin,
+    );
     loginTexts = context.read<LoginTexts>();
     theme = Theme.of(context);
     auth = context.read<Auth>();
@@ -81,27 +82,28 @@ class __WebFormState extends State<_WebForm> {
   }
 
   Widget get _webView => AnimatedBuilder(
-        animation: transitionAnimation,
-        child: _webViewChild,
-        builder: (BuildContext context, Widget? child) => Transform.translate(
+    animation: transitionAnimation,
+    child: _webViewChild,
+    builder:
+        (BuildContext context, Widget? child) => Transform.translate(
           offset: Offset(dynamicSize.width * transitionAnimation.value, 0),
           child: child,
         ),
-      );
+  );
 
   Widget get _webViewChild => Container(
-        width: dynamicSize.width * context.read<LoginTheme>().formWidthRatio,
-        height: dynamicSize.height * 100,
-        color: Colors.white,
-        child: AnimatedBuilder(
-          animation: offsetAnimation,
-          child: _formColumn,
-          builder: (BuildContext context, Widget? child) => Transform.translate(
+    width: dynamicSize.width * context.read<LoginTheme>().formWidthRatio,
+    constraints: BoxConstraints(maxHeight: dynamicSize.height * 100),
+    color: Colors.white,
+    child: AnimatedBuilder(
+      animation: offsetAnimation,
+      builder:
+          (BuildContext context, Widget? child) => Transform.translate(
             offset: Offset(dynamicSize.width * offsetAnimation.value, 0),
-            child: child,
+            child: SingleChildScrollView(child: Expanded(child: _formColumn)),
           ),
-        ),
-      );
+    ),
+  );
 
   Widget get _formColumn {
     final items = <Widget>[];
@@ -130,7 +132,7 @@ class __WebFormState extends State<_WebForm> {
       case LoginComponents.policyCheckbox:
         return <Widget>[
           if (!_isAnimatedLogin)
-            widget.privacyPolicyChild ?? const _PolicyCheckboxRow()
+            widget.privacyPolicyChild ?? const _PolicyCheckboxRow(),
         ];
       case LoginComponents.forgotPassword:
         return <Widget>[if (_isAnimatedLogin) const _ForgotPassword()];
@@ -148,17 +150,21 @@ class __WebFormState extends State<_WebForm> {
   void _initializeAnimations() {
     /// Initializes the transition animation from welcome part's width ratio
     /// to 0 with custom animation curve and animation controller.
-    transitionAnimation = _isLandscape
-        ? Tween<double>(begin: 100 - loginTheme.formWidthRatio, end: 0).animate(
-            CurvedAnimation(
-              parent: widget.animationController,
-              curve: loginTheme.animationCurve,
-            ),
-          )
-        : AnimationHelper(
-            animationController: widget.animationController,
-            animationCurve: loginTheme.animationCurve,
-          ).tweenSequenceAnimation(120, 20);
+    transitionAnimation =
+        _isLandscape
+            ? Tween<double>(
+              begin: 100 - loginTheme.formWidthRatio,
+              end: 0,
+            ).animate(
+              CurvedAnimation(
+                parent: widget.animationController,
+                curve: loginTheme.animationCurve,
+              ),
+            )
+            : AnimationHelper(
+              animationController: widget.animationController,
+              animationCurve: loginTheme.animationCurve,
+            ).tweenSequenceAnimation(120, 20);
   }
 }
 
@@ -185,21 +191,23 @@ class _PolicyCheckboxRow extends StatelessWidget {
   }
 
   Widget _errorText(LoginTheme loginTheme) => Selector<Auth, bool>(
-        selector: (_, Auth authModel) => authModel.showCheckboxError,
-        builder: (BuildContext context, bool showError, __) => Visibility(
+    selector: (_, Auth authModel) => authModel.showCheckboxError,
+    builder:
+        (BuildContext context, bool showError, __) => Visibility(
           visible: showError,
           child: Padding(
-            padding:
-                EdgeInsets.only(top: DynamicSize(context).responsiveSize * 2.5),
+            padding: EdgeInsets.only(
+              top: DynamicSize(context).responsiveSize * 2.5,
+            ),
             child: BaseText(
               context.read<LoginTexts>().checkboxError,
-              style: TextStyles(context)
-                  .errorTextStyle()
-                  .merge(loginTheme.errorTextStyle),
+              style: TextStyles(
+                context,
+              ).errorTextStyle().merge(loginTheme.errorTextStyle),
             ),
           ),
         ),
-      );
+  );
 
   Widget _checkboxText(BuildContext context, LoginTheme loginTheme) {
     final loginTexts = context.read<LoginTexts>();
@@ -211,24 +219,28 @@ class _PolicyCheckboxRow extends StatelessWidget {
           TextSpan(text: loginTexts.agreementText),
           TextSpan(
             text: loginTexts.privacyPolicyText,
-            style: loginTheme.privacyPolicyLinkStyle ??
+            style:
+                loginTheme.privacyPolicyLinkStyle ??
                 const TextStyle(
                   color: Colors.blue,
                   decoration: TextDecoration.underline,
                 ),
-            recognizer: TapGestureRecognizer()
-              ..onTap = () => _launchUrl(loginTexts.privacyPolicyLink),
+            recognizer:
+                TapGestureRecognizer()
+                  ..onTap = () => _launchUrl(loginTexts.privacyPolicyLink),
           ),
           const TextSpan(text: ' and '),
           TextSpan(
             text: loginTexts.termsConditionsText,
-            style: loginTheme.privacyPolicyLinkStyle ??
+            style:
+                loginTheme.privacyPolicyLinkStyle ??
                 const TextStyle(
                   color: Colors.blue,
                   decoration: TextDecoration.underline,
                 ),
-            recognizer: TapGestureRecognizer()
-              ..onTap = () => _launchUrl(loginTexts.termsConditionsLink),
+            recognizer:
+                TapGestureRecognizer()
+                  ..onTap = () => _launchUrl(loginTexts.termsConditionsLink),
           ),
         ],
       ),
@@ -236,32 +248,34 @@ class _PolicyCheckboxRow extends StatelessWidget {
   }
 
   Widget get _checkbox => Selector<Auth, bool>(
-        selector: (_, Auth authModel) => authModel.checkedPrivacyBox,
-        builder: (BuildContext context, bool checked, __) {
-          final loginTheme = context.watch<LoginTheme>();
-          final authModel = context.read<Auth>();
-          final activeColor =
-              loginTheme.privacyPolicyLinkStyle?.color ?? Colors.white;
-          final isLandscape = loginTheme.isLandscape;
-          return Checkbox(
-            materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-            value: checked,
-            onChanged: (bool? newVal) =>
+    selector: (_, Auth authModel) => authModel.checkedPrivacyBox,
+    builder: (BuildContext context, bool checked, __) {
+      final loginTheme = context.watch<LoginTheme>();
+      final authModel = context.read<Auth>();
+      final activeColor =
+          loginTheme.privacyPolicyLinkStyle?.color ?? Colors.white;
+      final isLandscape = loginTheme.isLandscape;
+      return Checkbox(
+        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+        value: checked,
+        onChanged:
+            (bool? newVal) =>
                 authModel.setCheckedPrivacyPolicy(newValue: newVal),
-            checkColor: loginTheme.checkColor ??
-                (checked
-                    ? (isLandscape ? Colors.white : loginTheme.backgroundColor)
-                    : activeColor),
-            side: BorderSide(
-              color: loginTheme.borderColor ?? activeColor,
-              width: 1.5,
-            ),
-            fillColor: MaterialStateProperty.all<Color>(
-              loginTheme.fillColor ?? activeColor,
-            ),
-          );
-        },
+        checkColor:
+            loginTheme.checkColor ??
+            (checked
+                ? (isLandscape ? Colors.white : loginTheme.backgroundColor)
+                : activeColor),
+        side: BorderSide(
+          color: loginTheme.borderColor ?? activeColor,
+          width: 1.5,
+        ),
+        fillColor: MaterialStateProperty.all<Color>(
+          loginTheme.fillColor ?? activeColor,
+        ),
       );
+    },
+  );
 
   Future<void> _launchUrl(String url) async {
     if (!await launchUrl(Uri.parse(url))) {
@@ -277,18 +291,21 @@ class _ActionButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final loginTheme = context.watch<LoginTheme>();
     final loginTexts = context.read<LoginTexts>();
-    final isAnimatedLogin =
-        context.select<Auth, bool>((Auth auth) => auth.isAnimatedLogin);
+    final isAnimatedLogin = context.select<Auth, bool>(
+      (Auth auth) => auth.isAnimatedLogin,
+    );
     final isLandscape = loginTheme.isLandscape;
     return Padding(
-      padding: loginTheme.actionButtonPadding ??
+      padding:
+          loginTheme.actionButtonPadding ??
           EdgeInsets.symmetric(vertical: _customSpace(context, isLandscape)),
       child: RoundedButton(
         buttonText: isAnimatedLogin ? loginTexts.login : loginTexts.signUp,
         onPressed: context.read<Auth>().action,
-        backgroundColor: isLandscape
-            ? Theme.of(context).primaryColor.withOpacity(.8)
-            : Colors.white,
+        backgroundColor:
+            isLandscape
+                ? Theme.of(context).primaryColor.withOpacity(.8)
+                : Colors.white,
         buttonStyle: loginTheme.actionButtonStyle,
       ),
     );
@@ -332,10 +349,12 @@ class _SocialLoginOptions extends StatelessWidget {
     final loginTheme = context.watch<LoginTheme>();
     final dynamicSize = DynamicSize(context);
     return Padding(
-      padding: loginTheme.socialLoginPadding ??
+      padding:
+          loginTheme.socialLoginPadding ??
           EdgeInsets.symmetric(vertical: dynamicSize.height * 1.4),
       child: Wrap(
-        spacing: context.read<LoginTheme>().socialLoginsSpacing ??
+        spacing:
+            context.read<LoginTheme>().socialLoginsSpacing ??
             dynamicSize.responsiveSize * 10,
         alignment: WrapAlignment.center,
         children: _socialLoginButtons(context, loginTheme.isLandscape),
@@ -365,7 +384,8 @@ class _UseEmailText extends StatelessWidget {
     final loginTheme = context.watch<LoginTheme>();
     final dynamicSize = DynamicSize(context);
     return Padding(
-      padding: loginTheme.useEmailPadding ??
+      padding:
+          loginTheme.useEmailPadding ??
           EdgeInsets.only(top: dynamicSize.height),
       child: _useEmailText(context, loginTheme),
     );
@@ -410,7 +430,8 @@ class _FormState extends State<_Form> {
     final loginTheme = context.watch<LoginTheme>();
     final dynamicSize = DynamicSize(context);
     return Padding(
-      padding: loginTheme.formPadding ??
+      padding:
+          loginTheme.formPadding ??
           EdgeInsets.symmetric(vertical: dynamicSize.height * 2),
       child: Form(
         key: auth.formKey,
@@ -418,7 +439,8 @@ class _FormState extends State<_Form> {
           direction: Axis.vertical,
           alignment: WrapAlignment.center,
           crossAxisAlignment: WrapCrossAlignment.center,
-          spacing: context.read<LoginTheme>().formElementsSpacing ??
+          spacing:
+              context.read<LoginTheme>().formElementsSpacing ??
               dynamicSize.height * (loginTheme.isLandscape ? 2.2 : 1.2),
           children: _formElements(auth, loginTheme),
         ),
@@ -428,8 +450,9 @@ class _FormState extends State<_Form> {
 
   List<Widget> _formElements(Auth auth, LoginTheme loginTheme) {
     final loginTexts = context.read<LoginTexts>();
-    final isAnimatedLogin =
-        context.select<Auth, bool>((Auth auth) => auth.isAnimatedLogin);
+    final isAnimatedLogin = context.select<Auth, bool>(
+      (Auth auth) => auth.isAnimatedLogin,
+    );
     return <Widget>[
       if (!isAnimatedLogin && auth.signUpMode != SignUpModes.confirmPassword)
         CustomTextFormField(
@@ -449,9 +472,10 @@ class _FormState extends State<_Form> {
         ),
       CustomTextFormField(
         controller: auth.emailController,
-        hintText: auth.isSignup
-            ? loginTexts.signupEmailHint
-            : loginTexts.loginEmailHint,
+        hintText:
+            auth.isSignup
+                ? loginTexts.signupEmailHint
+                : loginTexts.loginEmailHint,
         prefixIcon: Icons.email_outlined,
         prefixWidget: loginTheme.emailIcon,
         validator: auth.emailValidator,
@@ -462,16 +486,19 @@ class _FormState extends State<_Form> {
       ),
       ObscuredTextFormField(
         controller: auth.passwordController,
-        hintText: auth.isSignup
-            ? loginTexts.signupPasswordHint
-            : loginTexts.loginPasswordHint,
+        hintText:
+            auth.isSignup
+                ? loginTexts.signupPasswordHint
+                : loginTexts.loginPasswordHint,
         prefixIcon: Icons.password_outlined,
         showPasswordVisibility: auth.showPasswordVisibility,
         textInputAction:
             auth.isSignup ? TextInputAction.next : TextInputAction.done,
-        onFieldSubmitted: (_) => auth.isSignup
-            ? _confirmPasswordFocus.requestFocus()
-            : auth.action(),
+        onFieldSubmitted:
+            (_) =>
+                auth.isSignup
+                    ? _confirmPasswordFocus.requestFocus()
+                    : auth.action(),
         onChanged: auth.setPassword,
         validator: auth.passwordValidator,
       ),
@@ -501,7 +528,8 @@ class _ForgotPassword extends StatelessWidget {
     final isLandscape = loginTheme.isLandscape;
     return Container(
       alignment: isLandscape ? Alignment.center : Alignment.topCenter,
-      padding: loginTheme.forgotPasswordPadding ??
+      padding:
+          loginTheme.forgotPasswordPadding ??
           (isLandscape
               ? dynamicSize.lowTopPadding
               : dynamicSize.lowBottomPadding),

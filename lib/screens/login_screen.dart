@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:animated_login/animated_login.dart';
-import '/src/models/language_option.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'email_verification_screen.dart';
 import 'forgot_password_screen.dart';
+import 'package:provider/provider.dart';
+
 import 'home_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -126,6 +127,22 @@ class _LoginScreenState extends State<LoginScreen> {
               return e.toString();
             }
           },
+          languageOptions: const [
+            LanguageOption(code: 'EN', value: 'English'),
+            LanguageOption(code: 'ID', value: 'Indonesia'),
+            LanguageOption(code: 'JP', value: '日本語'),
+          ],
+          changeLanguageCallback: (LanguageOption? languageOption) {
+            print('Bahasa dipilih: ${languageOption?.value}');
+            if (languageOption != null) {
+              Provider.of<LoginTexts>(context, listen: false).language =
+                  languageOption;
+            }
+          },
+          selectedLanguage: const LanguageOption(
+            code: 'id',
+            value: 'Indonesia',
+          ),
         ),
       ),
     );
