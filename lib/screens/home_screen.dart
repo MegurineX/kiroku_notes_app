@@ -13,7 +13,7 @@ class HomeScreen extends ConsumerStatefulWidget {
 }
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
-  bool isDrawerOpen = true; // <-- ini untuk toggle drawer di desktop
+  bool isDrawerOpen = true; // <-- this is for toggling the drawer on desktop
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +52,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     ),
                     child: Row(
                       children: [
-                        // Icon menu untuk mobile dan desktop
+                        // Menu icon for mobile and desktop
                         Builder(
                           builder:
                               (context) => IconButton(
@@ -71,7 +71,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
                         const Spacer(),
 
-                        // Icon baris kanan
+                        // Right-hand side icons
                         Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [

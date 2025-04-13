@@ -30,10 +30,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 password: data.password,
               );
 
-              // Periksa apakah email sudah diverifikasi
+                // Check if the email is verified
               if (userCredential.user != null &&
                   !userCredential.user!.emailVerified) {
-                // Jika belum diverifikasi, arahkan ke halaman verifikasi email
+                // If not verified, navigate to the email verification page
                 Future.delayed(Duration.zero, () {
                   Navigator.push(
                     context,
@@ -45,7 +45,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 return 'メールアドレスを確認してください';
               }
 
-              // Navigasi ke halaman home setelah login berhasil
+                // Navigate to the home page after successful login
               WidgetsBinding.instance.addPostFrameCallback((_) {
                 Navigator.pushReplacement(
                   context,
@@ -61,16 +61,16 @@ class _LoginScreenState extends State<LoginScreen> {
           },
           onSignup: (SignUpData data) async {
             try {
-              // Buat akun baru
+              // create new account
               final userCredential = await _auth.createUserWithEmailAndPassword(
                 email: data.email,
                 password: data.password,
               );
 
-              // Kirim email verifikasi
+              // send email verification
               await userCredential.user!.sendEmailVerification();
 
-              // Arahkan pengguna ke halaman verifikasi email
+                // Navigate the user to the email verification page
               Future.delayed(Duration.zero, () {
                 Navigator.push(
                   context,
@@ -90,7 +90,7 @@ class _LoginScreenState extends State<LoginScreen> {
               iconPath: 'assets/images/google.png',
               callback: () async {
                 try {
-                  // Implementasi login Google akan ditambahkan disini
+                    // Google login implementation will be added here
                   return null;
                 } catch (e) {
                   return e.toString();
@@ -101,7 +101,7 @@ class _LoginScreenState extends State<LoginScreen> {
               iconPath: 'assets/images/facebook.png',
               callback: () async {
                 try {
-                  // Implementasi login Facebook akan ditambahkan disini
+                    // Facebook login implementation will be added here
                   return null;
                 } catch (e) {
                   return e.toString();
@@ -111,7 +111,7 @@ class _LoginScreenState extends State<LoginScreen> {
           ],
           onForgotPassword: (String email) async {
             try {
-              // Navigasi ke halaman lupa password
+                // Navigate to the forgot password page
               Future.delayed(Duration.zero, () {
                 Navigator.push(
                   context,

@@ -18,12 +18,12 @@ class ComplateProfileScreen extends StatelessWidget {
       ),
       body: SafeArea(
         child: Center(
-          // 1. Bungkus dengan Center
+            // 1. Wrap with Center
           child: SizedBox(
             width:
                 MediaQuery.of(context).size.width > 600
-                    ? 400
-                    : double.infinity, // 2. Batasi lebar maksimum
+                  ? 400
+                  : double.infinity, // 2. Limit maximum width
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: SingleChildScrollView(
@@ -78,7 +78,7 @@ class ComplateProfileForm extends StatelessWidget {
     return Form(
       child: Column(
         children: [
-          // 4. Bungkus dengan ConstrainedBox
+          // 4. Wrap with ConstrainedBox
           ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 350),
             child: TextFormField(
@@ -105,7 +105,7 @@ class ComplateProfileForm extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 24),
-            // 5. Bungkus dengan ConstrainedBox
+            // 5. Wrap with ConstrainedBox
             child: ConstrainedBox(
               constraints: const BoxConstraints(maxWidth: 350),
               child: TextFormField(
@@ -131,7 +131,7 @@ class ComplateProfileForm extends StatelessWidget {
               ),
             ),
           ),
-          // 6. Bungkus dengan ConstrainedBox
+          // 6. Wrap with ConstrainedBox
           ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 350),
             child: TextFormField(
@@ -158,7 +158,7 @@ class ComplateProfileForm extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 24),
-            // 7. Bungkus dengan ConstrainedBox
+            // 7. Wrap with ConstrainedBox
             child: ConstrainedBox(
               constraints: const BoxConstraints(maxWidth: 350),
               child: TextFormField(
@@ -184,7 +184,7 @@ class ComplateProfileForm extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 8),
-          // 8. Bungkus dengan ConstrainedBox
+            // 8. Wrap with ConstrainedBox
           ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 350),
             child: SizedBox(

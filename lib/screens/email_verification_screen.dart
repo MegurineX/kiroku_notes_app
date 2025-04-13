@@ -52,7 +52,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
     });
 
     if (_isEmailVerified) {
-      // Navigasi ke halaman login
+      // Navigate to the login page
       WidgetsBinding.instance.addPostFrameCallback((_) {
         Navigator.pushReplacement(
           context,
@@ -70,19 +70,19 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
     return _isEmailVerified
         ? const Scaffold(body: Center(child: Text('メールが確認されました!')))
         : Scaffold(
-          backgroundColor: Colors.white, // 1. Warna latar belakang putih
+            backgroundColor: Colors.white, // 1. White background color
           appBar: AppBar(
-            backgroundColor: Colors.white, // 2. Warna AppBar putih
+            backgroundColor: Colors.white, // 2. White AppBar color
             title: const Text('メール認証'),
           ),
           body: SafeArea(
             child: Center(
-              // 3. Bungkus dengan Center
+                // 3. Wrap with Center
               child: SizedBox(
                 width:
                     MediaQuery.of(context).size.width > 600
-                        ? 400
-                        : double.infinity, // 4. Batasi lebar maksimum
+                      ? 400
+                      : double.infinity, // 4. Limit maximum width
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: SingleChildScrollView(
@@ -96,7 +96,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                           style: TextStyle(color: Color(0xFF757575)),
                         ),
                         const SizedBox(height: 32),
-                        // 5. Bungkus dengan ConstrainedBox
+                        // 5. Wrap with ConstrainedBox
                         ConstrainedBox(
                           constraints: const BoxConstraints(maxWidth: 350),
                           child: SizedBox(
@@ -110,7 +110,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                                 elevation: 0,
                                 backgroundColor: const Color(
                                   0xFFFF7643,
-                                ), // 6. Warna tombol oranye
+                                ), // 6. Orange button color
                                 foregroundColor: Colors.white,
                                 minimumSize: const Size(double.infinity, 48),
                                 shape: const RoundedRectangleBorder(
@@ -126,9 +126,9 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                         const SizedBox(height: 20),
                         TextButton(
                           onPressed: () {
-                            // Kembali ke halaman login
+                            // Return to the login page
                             Navigator.of(context).pop();
-                            // Logout jika user sudah login
+                            // Logout if the user is already logged in
                             if (_auth.currentUser != null) {
                               _auth.signOut();
                             }

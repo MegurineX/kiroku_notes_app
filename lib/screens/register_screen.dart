@@ -79,7 +79,7 @@ class SignUpForm extends StatelessWidget {
     return Form(
       child: Column(
         children: [
-          // 1. Bungkus dengan ConstrainedBox
+            // 1. Wrap with ConstrainedBox
           ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 350),
             child: TextFormField(
@@ -106,7 +106,7 @@ class SignUpForm extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 24),
-            // 2. Bungkus dengan ConstrainedBox
+            // 2. Wrap with ConstrainedBox
             child: ConstrainedBox(
               constraints: const BoxConstraints(maxWidth: 350),
               child: TextFormField(
@@ -133,7 +133,7 @@ class SignUpForm extends StatelessWidget {
               ),
             ),
           ),
-          // 3. Bungkus dengan ConstrainedBox
+            // 3. Wrap with ConstrainedBox
           ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 350),
             child: TextFormField(
@@ -159,7 +159,7 @@ class SignUpForm extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 32),
-          // 4. Bungkus dengan ConstrainedBox
+            // 4. Wrap with ConstrainedBox
           ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 350),
             child: SizedBox(

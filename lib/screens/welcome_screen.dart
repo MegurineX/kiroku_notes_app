@@ -14,8 +14,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   void initState() {
     super.initState();
-    // Navigasi ke halaman login setelah 2 detik
-    Future.delayed(const Duration(seconds: 2), () {
+    // Navigate to the login page after 4 seconds
+    Future.delayed(const Duration(seconds: 4), () {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => const LoginScreen()),
