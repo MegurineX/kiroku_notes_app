@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'login_screen.dart';
 
 class EmailVerificationScreen extends StatefulWidget {
   const EmailVerificationScreen({Key? key}) : super(key: key);
@@ -51,7 +52,13 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
     });
 
     if (_isEmailVerified) {
-      // TODO: Navigate to home screen
+      // Navigasi ke halaman login
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const LoginScreen()),
+        );
+      });
     } else {
       // Poll again after a delay
       Future.delayed(const Duration(seconds: 5), () => _checkEmailVerified());
@@ -119,7 +126,12 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                         const SizedBox(height: 20),
                         TextButton(
                           onPressed: () {
-                            // TODO: Cancel and go back to login
+                            // Kembali ke halaman login
+                            Navigator.of(context).pop();
+                            // Logout jika user sudah login
+                            if (_auth.currentUser != null) {
+                              _auth.signOut();
+                            }
                           },
                           child: const Text(
                             'Cancel',
