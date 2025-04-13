@@ -2,6 +2,16 @@ library animated_login;
 
 import 'dart:async';
 
+import 'login_screen.dart';
+import 'email_verification_screen.dart';
+import 'forgot_password_screen.dart';
+import 'home_screen.dart';
+import 'package:animated_login/src/constants/enums/animated_component.dart';
+import 'package:animated_login/src/models/language_option.dart';
+import 'package:animated_login/src/models/social_login.dart';
+import 'package:animated_login/src/models/validator_model.dart';
+import 'package:animated_login/src/providers/auth.dart';
+
 import 'package:animated_login/src/src_shelf.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';

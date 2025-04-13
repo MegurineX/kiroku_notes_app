@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:animated_login/animated_login.dart';
+import 'package:animated_login/src/models/language_option.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'email_verification_screen.dart';
 import 'forgot_password_screen.dart';
