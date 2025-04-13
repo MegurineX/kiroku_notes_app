@@ -245,7 +245,7 @@ class LoginTexts extends ChangeNotifier {
   static const String _defaultDialogButtonText = '了解';
   static const String _defaultChooseLanguageTitle = '言語を選択してください';
   static const String _defaultAgreementText = '同意する ';
-  static const String _defaultPrivacyPolicyText = 'プライバシーポリシー’;
+  static const String _defaultPrivacyPolicyText = 'プライバシーポリシー';
   static const String _defaultTermsConditionsText = '利用規約';
   static const String _defaultPrivacyPolicyLink =
       'https://github.com/bahricanyesil';
